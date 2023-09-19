@@ -1,5 +1,4 @@
 #include "util.h"
-#include <gmp.h>
 
 
 /* Python implementation from pubcrypt

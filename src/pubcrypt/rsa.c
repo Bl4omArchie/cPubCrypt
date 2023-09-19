@@ -6,7 +6,7 @@
 struct RSA_KEYPAIR {
     int key_size;
     mpz_t public_modulus;         //public modulus: n
-    int public_exponent;        //public exponent: e
+    mpz_t public_exponent;        //public exponent: e
     mpz_t p_factor;               //prime factor: p
     mpz_t q_factor;               //prime factor: q
     mpz_t p_factor_minus_one;     //p-1

@@ -15,19 +15,21 @@ void generate_random_int(mpz_t result, int bit_length) {
 }
 
 
-int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_length) {
-    mpz_t candidate_p, candidate_q;
+int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, mpz_t e, int prime_length) {
+    mpz_t candidate_p, candidate_q, gcd_result;
     mpz_init(candidate_p);
     mpz_init(candidate_q);
+    mpz_init(gcd_result);
 
     int i = 0;
 
-    // Step 4: Generate p
+    // Generate p
     while (i < 5 * prime_length) {
         generate_random_int(candidate_p, prime_length / 2);
 
         if (mpz_cmp_ui(candidate_p, 1 << (prime_length- 1)) >= 0) {
-            if (gcd(NULL, candidate_p - 1, e) == 1) {
+            gcd(gcd_result, candidate_p-1, e);
+            if (gcd_result == 1) {
                 if (is_probably_prime(candidate_p, 25)) {
                     break;
                 }
@@ -44,19 +46,21 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_length) {
 
     i = 0;
 
-    // Step 5: Generate q
+    // Generate q
     while (i < 5 * prime_length) {
         generate_random_int(candidate_q, prime_length);
 
         if (mpz_cmp_ui(candidate_q, 1 << (prime_length - 1)) >= 0) {
-            if (gcd(NULL, candidate_q - 1, e) == 1) {
+            gcd(gcd_result, candidate_q-1, e);
+            if (gcd_result == 1) {
                 if (is_probably_prime(candidate_q, 25)) {
                     if (mpz_cmpabs(candidate_p, candidate_q) > (1 << (prime_length - 100))) {
-                        prime_p = &candidate_p;
-                        prime_q = &candidate_q;
+                        prime_p = &candidate_p;                                                     //storing the prime p into a pointer so it can be retrieve in the generate() function 
+                        prime_q = &candidate_q;                                                     //same with the prime q
 
                         mpz_clear(candidate_p);
                         mpz_clear(candidate_q);
+                        mpz_clear(gcd_result);
                         return SUCCESS;
                     }
                 }
@@ -67,6 +71,7 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_length) {
 
     mpz_clear(candidate_p);
     mpz_clear(candidate_q);
+    mpz_clear(gcd_result);
     printf("FAILURE: Unable to generate q.\n");
     return FAILURE;
 }
