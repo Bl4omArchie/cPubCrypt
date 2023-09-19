@@ -4,16 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gmp.h>
+#include <time.h>
 
 // prime.c
-int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int prime_size);
+int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_size);
 
 // rsa.c
 int generate(int key_size);
 
-
-// arithmetic.c
-void gcd(mpz_t *result, mpz_t a, mpz_t b);
-
+//random.c
+void generate_random_odd(mpz_t rand_num, int size);
+int is_probably_prime(mpz_t n, int iterations);
 
 #endif
