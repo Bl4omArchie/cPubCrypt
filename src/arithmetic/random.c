@@ -1,5 +1,4 @@
-#include <gmp.h>
-#include "rsa.h"
+#include "util.h"
 
 void generate_random_odd(mpz_t rand_num, int size) {
     gmp_randstate_t state;

@@ -1,4 +1,4 @@
-#include "rsa.h"
+#include "util.h"
 
 #define SUCCESS 1
 #define FAILURE 0
@@ -27,7 +27,7 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_length) {
         generate_random_int(candidate_p, prime_length / 2);
 
         if (mpz_cmp_ui(candidate_p, 1 << (prime_length- 1)) >= 0) {
-            if (mpz_gcd_ui(NULL, candidate_p - 1, e) == 1) {
+            if (gcd(NULL, candidate_p - 1, e) == 1) {
                 if (is_probably_prime(candidate_p, 25)) {
                     break;
                 }
@@ -49,7 +49,7 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, int e, int prime_length) {
         generate_random_int(candidate_q, prime_length);
 
         if (mpz_cmp_ui(candidate_q, 1 << (prime_length - 1)) >= 0) {
-            if (mpz_gcd_ui(NULL, candidate_q - 1, e) == 1) {
+            if (gcd(NULL, candidate_q - 1, e) == 1) {
                 if (is_probably_prime(candidate_q, 25)) {
                     if (mpz_cmpabs(candidate_p, candidate_q) > (1 << (prime_length - 100))) {
                         prime_p = &candidate_p;
