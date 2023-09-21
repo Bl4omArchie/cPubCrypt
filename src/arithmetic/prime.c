@@ -29,7 +29,7 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, mpz_t e, int prime_length)
 
         if (mpz_cmp_ui(candidate_p, 1 << (prime_length- 1)) >= 0) {
             gcd(gcd_result, candidate_p-1, e);
-            if (gcd_result == 1) {
+            if (mpz_cmp_ui(gcd_result, 1) == 1) {
                 if (is_probably_prime(candidate_p, 25)) {
                     break;
                 }
@@ -52,7 +52,7 @@ int get_prime_factors(mpz_t *prime_p, mpz_t *prime_q, mpz_t e, int prime_length)
 
         if (mpz_cmp_ui(candidate_q, 1 << (prime_length - 1)) >= 0) {
             gcd(gcd_result, candidate_q-1, e);
-            if (gcd_result == 1) {
+            if (mpz_cmp_ui(gcd_result, 1) == 1) {
                 if (is_probably_prime(candidate_q, 25)) {
                     if (mpz_cmpabs(candidate_p, candidate_q) > (1 << (prime_length - 100))) {
                         prime_p = &candidate_p;                                                     //storing the prime p into a pointer so it can be retrieve in the generate() function 
