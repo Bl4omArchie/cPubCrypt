@@ -5,6 +5,7 @@ cPubCrypt is the C version of PubCrypt. The idea stay the same but with a new sp
 
 ## RSA_KEYPAIR structure
 
+```py
 struct RSA_KEYPAIR {
     int key_size;
     mpz_t public_modulus;         //public modulus: n
@@ -15,6 +16,7 @@ struct RSA_KEYPAIR {
     mpz_t q_factor_minus_one;     //q-1
     mpz_t private_exponent;       //private exponent: d
 };
+```
 
 
 ## Installation and compilation
