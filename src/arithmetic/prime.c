@@ -5,6 +5,8 @@
 #define MILLER_RABIN_ROUND 5
 
 
+
+
 /*
 get_prime_factors() implements the appendix B.3.3 from NIST.FIPS.186-4
 
@@ -15,16 +17,24 @@ get_prime_factors() implements the appendix B.3.3 from NIST.FIPS.186-4
 
 
 int get_prime_factors(struct RSA_KEYPAIR *kp_struct) {
-    mpz_t tmp;
-    mpz_t sqrt_two;
-    mpz_init(tmp);
-    mpz_init(sqrt_two);
-
     int prime_size = kp_struct->key_size/2;
-    mpz_set_str(sqrt_two, "2", 10);
-    mpz_sqrt(sqrt_two, sqrt_two);
-    int i = 0;
 
+    mpz_t tmp;
+    mpz_t tmp_square_root;
+    mpz_t tmp_prime_size;
+    mpz_init(tmp);
+    mpz_init(tmp_square_root);
+    mpz_init(tmp_prime_size);
+
+    //square root of 2
+    mpz_set_ui(tmp_square_root, 2);
+    mpz_sqrt(tmp_square_root, tmp_square_root);
+
+    //2^prime_size-1
+    mpz_mul_2exp(tmp_prime_size, 2, prime_size - 1);
+
+
+    int i = 0;
     // Generate p, steps 4
     while (i < 5 * kp_struct->key_size) {
         //steps 4.2 & 4.3
@@ -33,8 +43,7 @@ int get_prime_factors(struct RSA_KEYPAIR *kp_struct) {
         mpz_sub_ui(kp_struct->p_factor_minus_one, kp_struct->p_factor, 1);
 
         // steps 4.4 - Check if p < sqrt(2)^(2(nlen/2 - 1))
-        mpz_mul_2exp(tmp, 2, prime_size - 1);
-        mpz_mul(tmp, sqrt_two, tmp);
+        mpz_mul(tmp, tmp_square_root, tmp_prime_size);
         if (mpz_cmp(kp_struct->p_factor, tmp) >= 0) {
 
             //steps 4.5

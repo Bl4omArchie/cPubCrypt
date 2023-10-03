@@ -2,6 +2,14 @@
 
 cPubCrypt is the C version of PubCrypt. The idea stay the same but with a new specifity: Bignum. To handle big numbers, I'm using GMP library 
 
+## Installation and compilation
+```
+git clone https://github.com/Bl4omArchie/cPubCrypt
+cd cPubcrypt
+make
+./rsa 2048
+```
+
 
 ## RSA_KEYPAIR structure
 
@@ -16,16 +24,8 @@ struct RSA_KEYPAIR {
     mpz_t q_factor_minus_one;     //q-1
     mpz_t private_exponent;       //private exponent: d
 };
-```
+``` 
 
-
-## Installation and compilation
-```
-git clone https://github.com/Bl4omArchie/cPubCrypt
-cd cPubcrypt
-make
-./rsa 2048
-```
 
 ## Sources:
 - [GMP man](https://gmplib.org/manual/)
