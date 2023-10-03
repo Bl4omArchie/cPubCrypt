@@ -3,7 +3,7 @@ CFLAGS = -Isrc/includes
 LDFLAGS = -lgmp
 SOURCES = main.c $(wildcard src/arithmetic/*.c) $(wildcard src/pubcrypt/*.c)
 OBJECTS = $(SOURCES:.c=.o)
-EXECUTABLE = rsa
+EXECUTABLE = rsa.o
 
 all: $(EXECUTABLE)
 

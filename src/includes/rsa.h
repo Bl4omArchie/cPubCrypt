@@ -22,6 +22,7 @@ struct RSA_KEYPAIR {
     mpz_t q_factor;               //prime factor: q
     mpz_t p_factor_minus_one;     //p-1
     mpz_t q_factor_minus_one;     //q-1
+    mpz_t p_minus_q;              //|p-q|
     mpz_t private_exponent;       //private exponent: d
 };
 
