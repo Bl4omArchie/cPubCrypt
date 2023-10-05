@@ -26,6 +26,16 @@ struct RSA_KEYPAIR {
 };
 ``` 
 
+## RNG function
+
+The RNG is coded in the src/arithmetic/random.c file:
+```c
+void generate_random_odd(mpz_t rand_num, int size);
+unsigned long int readSecureRandomSeed();
+```
+
+The funcion generate_random_odd generate an odd number for the get_prime_factors algorithm. 
+The seed is taken from the /dev/urandom file.
 
 ## Sources:
 - [GMP man](https://gmplib.org/manual/)

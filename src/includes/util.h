@@ -12,7 +12,7 @@
 void gcd(mpz_t result, mpz_t x, mpz_t y);
 
 //exp.c
-void pow_fast(mpz_t *result, mpz_t x, mpz_t e, mpz_t m);
+void pow_fast(mpz_t *result, mpz_t b, mpz_t e, mpz_t m);
 
 //random.c
 void generate_random_odd(mpz_t rand_num, int size);
