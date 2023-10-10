@@ -30,14 +30,12 @@ unsigned long int readSecureRandomSeed() {
     return seed;
 }
 
-void generate_random_odd(mpz_t rand_num, int size) {
+void generate_random(mpz_t rand_num, int size) {
     gmp_randstate_t state;
 
     gmp_randinit_default(state);
     gmp_randseed_ui(state, readSecureRandomSeed());
 
     mpz_urandomb(rand_num, state, size);
-    mpz_setbit(rand_num, 0);
-
     gmp_randclear(state);
 }

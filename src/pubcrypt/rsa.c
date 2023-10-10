@@ -3,12 +3,10 @@
 
 
 int generate(int key_size) {
-    /*
-        1. Init mpz_t p, q
-        2. generate p and q
-        3. verify p and q with consistency test
-        4. Give a structure of the RSA keypair
-    */
+    if (key_size < 2048 && key_size > 8192) {
+        printf ("Wrong key size. It must be included in the range [2048; 8192]");
+        return 0;
+    }
 
     //I'm setting a pointer on the RSA_KEYPAIR struct 
     //As a simplification, public_exponent = 65537 
@@ -23,4 +21,4 @@ int generate(int key_size) {
 
     else
         return 0;
-}
+}   

@@ -23,7 +23,7 @@ def pow_fast(b, e, m):
     return result
 */
 
-void pow_fast(mpz_t *result, mpz_t b, mpz_t e, mpz_t m) {
+void pow_fast(mpz_t result, mpz_t b, mpz_t e, mpz_t m) {
     mpz_set_ui(result, 1);
 
     while (mpz_cmp_ui(e, 0) > 0) {
@@ -50,4 +50,9 @@ void pow_fast(mpz_t *result, mpz_t b, mpz_t e, mpz_t m) {
     if (mpz_cmp_ui(m, 0) != 0) {
         mpz_mod(result, result, m);
     }
+}
+
+//Implementation of the pow_fast function but with a integer exponent instead of a mpz_t type 
+void pow_fast_ui(mpz_t result, mpz_t b, unsigned long int e, mpz_t m) {
+
 }
