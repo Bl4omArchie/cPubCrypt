@@ -1,47 +1,70 @@
 # cPubCrypt
 
-cPubCrypt is the C version of PubCrypt. The idea stay the same but with a new specifity: Bignum. To handle big numbers, I'm using GMP library 
+cPubcrypt is the C/C++ version of my previous project Pubcrypt. I challenged myself with this new project because I wanted to add more features and handle more programming notions.
+This library intends to implement the RSA cryptosystem and give the main primitives such as keypair generation, encryption, decryption and more. 
 
-## Installation and compilation
-```
-git clone https://github.com/Bl4omArchie/cPubCrypt
-cd cPubcrypt
-make
-./rsa 2048
-```
+Whats new ?
+- Bignum: using GMP library I'm managing myself big numbers 
+- OOP: I've decided to write this library mainly in C++ so I could easily use OOP and offer a cleanest implementation of RSA 
+- Revision of arithmethics algorithm: with my benchmark in Pubcrypt I already tryied to implement the fastet algorithm possible. This time I'm going further with more efficient implementation (inspiration: CADO NFS).
 
+## Code organization
 
-## RSA_KEYPAIR structure
+In this section I'm detailling my code organization: class, struct and everything you need to know about cPubcrypt library !
 
-```py
-struct RSA_KEYPAIR {
-    int key_size;
-    mpz_t public_modulus;         //public modulus: n
-    mpz_t public_exponent;        //public exponent: e
-    mpz_t p_factor;               //prime factor: p
-    mpz_t q_factor;               //prime factor: q
-    mpz_t p_factor_minus_one;     //p-1
-    mpz_t q_factor_minus_one;     //q-1
-    mpz_t private_exponent;       //private exponent: d
+### Class
+
+```cpp
+class RSA_KEYPAIR 
+{
+    public:
+		//methods
+		RSA_KEYPAIR()
+		void build_keypair();
+		void check_validity();
+
+		//attributes
+        RSA_PUBLIC_KEY rsa_pub_key;
+        RSA_PRIVATE_KEY rsa_pv_key;
+
+    private:
+		//methods
+		void generate();
+		void encrypt();
+		void decrypt();
+		void sign();
+		void check_sign();
 };
-``` 
-This structure store every required informations for generating a RSA keypair. I still don't know how I'm going to manage the data at the end of the program but I have several possible scenarios:
-- call my library from your code and get the key directly from the struct
-- execute the binary and retrieve the key in a PEM file
-- the program print the public (n, e) and the private key (n, d) in the console
-
-Note: I'm storing p-1 and q-1 it is for computing the phi number and the CRT (Chinese Remainder Theorem).
-
-## RNG function
-
-The RNG is coded in the src/arithmetic/random.c file:
-```c
-void generate_random_odd(mpz_t rand_num, int size);
-unsigned long int readSecureRandomSeed();
 ```
 
-The funcion generate_random_odd generate an odd number for the get_prime_factors algorithm. 
-The seed is taken from the /dev/urandom file.
+
+### Structures
+```cpp
+struct RSA_PUBLIC_KEY {
+	int key_size;
+	mpz_t public_exponent;
+	mpz_t public_modulus;
+};
+
+```
+```cpp
+struct RSA_PRIVATE_KEY {
+	mpz_t private_exponent;
+	mpz_t public_modulus;
+	mpz_t prime_factor_p;
+	mpz_t prime_factor_q;
+	mpz_t dP;
+	mpz_t dQ;
+	mpz_t qInv;  
+};
+```
+
+### Modules
+
+None, everything is self made !
+
+
+
 
 ## References:
 

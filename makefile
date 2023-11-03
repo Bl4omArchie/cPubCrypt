@@ -1,9 +1,9 @@
-CC = gcc
-CFLAGS = -Isrc/includes
+CC = g++
+CFLAGS = -IcPubcrypt/includes
 LDFLAGS = -lgmp
-SOURCES = main.c $(wildcard src/arithmetic/*.c) $(wildcard src/pubcrypt/*.c)
+SOURCES = main.cpp $(wildcard cPubcrypt/algorithm/*.cpp) $(wildcard cPubcrypt/cryptosystem/*.cpp)
 OBJECTS = $(SOURCES:.c=.o)
-EXECUTABLE = rsa.o
+EXECUTABLE = main.o
 
 all: $(EXECUTABLE)
 
