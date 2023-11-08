@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -IcPubcrypt/includes
 LDFLAGS = -lgmp
-SOURCES = main.cpp $(wildcard cPubcrypt/algorithm/*.cpp) $(wildcard cPubcrypt/cryptosystem/*.cpp)
+SOURCES = main.cpp $(wildcard cPubcrypt/algorithm/*.c) $(wildcard cPubcrypt/cryptosystem/*.cpp)
 OBJECTS = $(SOURCES:.c=.o)
 EXECUTABLE = main.o
 
